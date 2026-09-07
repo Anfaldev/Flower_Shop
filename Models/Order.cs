@@ -11,7 +11,7 @@ namespace Flower_Shop.Models
 
         public Customer Customer { get; set; }
 
-        public ICollection<OrderItem> OrderItems { get; set; }
+        public ICollection<OrderItem>? OrderItems { get; set; }
     }
 }
 
