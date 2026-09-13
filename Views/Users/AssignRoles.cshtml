@@ -1,0 +1,67 @@
+﻿@model Flower_Shop.Models.User
+
+@{
+    ViewData["Title"] = "Assign Roles";
+
+    var allRoles =
+        ViewBag.AllRoles as List<Flower_Shop.Models.Role>;
+
+    var assignedRoles =
+        ViewBag.AssignedRoles as List<int>;
+}
+
+<div class="container mt-4">
+
+    <h2>Assign Roles</h2>
+
+    <h4>User: @Model.Username</h4>
+
+    <hr />
+
+    <form asp-action="AssignRoles" method="post">
+
+        <input type="hidden"
+               name="userId"
+               value="@Model.Id" />
+
+        @if (allRoles != null && allRoles.Any())
+        {
+            foreach (var role in allRoles)
+            {
+                bool isChecked =
+                    assignedRoles != null &&
+                    assignedRoles.Contains(role.Id);
+
+                <div class="form-check mb-2">
+
+                    <input class="form-check-input"
+                           type="checkbox"
+                           name="roleIds"
+                           value="@role.Id"
+                           @(isChecked ? "checked" : "") />
+
+                    <label class="form-check-label">
+                        @role.Name
+                    </label>
+
+                </div>
+            }
+        }
+        else
+        {
+            <p>No roles available.</p>
+        }
+
+        <button type="submit"
+                class="btn btn-primary mt-3">
+            Save Roles
+        </button>
+
+        <a asp-action="Index"
+           class="btn btn-secondary mt-3">
+            Back
+        </a>
+
+    </form>
+
+</div>

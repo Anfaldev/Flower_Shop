@@ -1,0 +1,63 @@
+﻿@model Flower_Shop.Models.User
+
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<div class="container mt-4">
+
+    <h2>Create User</h2>
+
+    <form asp-action="Create" method="post">
+
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">
+                Name
+            </label>
+
+            <input asp-for="Name"
+                   class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Username" class="form-label">
+                Username
+            </label>
+
+            <input asp-for="Username"
+                   class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">
+                Email
+            </label>
+
+            <input asp-for="Email"
+                   class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label">
+                Password
+            </label>
+
+            <input asp-for="Password"
+                   type="password"
+                   class="form-control" />
+        </div>
+
+        <button type="submit"
+                class="btn btn-primary">
+            Create
+        </button>
+
+        <a asp-action="Index"
+           class="btn btn-secondary">
+            Back
+        </a>
+
+    </form>
+
+</div>
+

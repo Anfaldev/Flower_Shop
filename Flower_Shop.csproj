@@ -19,6 +19,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Data\" />
@@ -26,6 +27,11 @@
     <None Remove="Views\Products\" />
     <None Remove="Views\Customers\" />
     <None Remove="Views\Orders\" />
+    <None Remove="Dtos\" />
+    <None Remove="Views\Roles\" />
+    <None Remove="Views\Permissions\" />
+    <None Remove="Views\Users\" />
+    <None Remove="Views\Accounts\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
@@ -33,5 +39,10 @@
     <Folder Include="Views\Products\" />
     <Folder Include="Views\Customers\" />
     <Folder Include="Views\Orders\" />
+    <Folder Include="Dtos\" />
+    <Folder Include="Views\Roles\" />
+    <Folder Include="Views\Permissions\" />
+    <Folder Include="Views\Users\" />
+    <Folder Include="Views\Accounts\" />
   </ItemGroup>
 </Project>
