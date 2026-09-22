@@ -1,0 +1,19 @@
+﻿@model Flower_Shop.Models.Employee
+
+<h2>Add Employee</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Personal Image</label>
+        <input type="file" name="imageFile" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+
+</form>

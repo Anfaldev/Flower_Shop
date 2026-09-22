@@ -1,0 +1,106 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.20" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.20">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.20" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.20">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Data\" />
+    <None Remove="Views\Categories\" />
+    <None Remove="Views\Products\" />
+    <None Remove="Views\Customers\" />
+    <None Remove="Views\Orders\" />
+    <None Remove="Dtos\" />
+    <None Remove="Views\Roles\" />
+    <None Remove="Views\Permissions\" />
+    <None Remove="Views\Users\" />
+    <None Remove="Views\Accounts\" />
+    <None Remove="Views\Employees\" />
+    <None Remove="Dtos\ProductsDtos\" />
+    <None Remove="Dtos\CategoriesDtos\" />
+    <None Remove="Dtos\CustomersDtos\" />
+    <None Remove="Dtos\OrdersDtos\" />
+    <None Remove="Dtos\OrderItemsDtos\" />
+    <None Remove="Dtos\UsersDtos\" />
+    <None Remove="Dtos\UserFilesDtos\" />
+    <None Remove="Dtos\RolesDtos\" />
+    <None Remove="Dtos\PermissionsDtos\" />
+    <None Remove="Views\OrderItems\" />
+    <None Remove="Repositories\" />
+    <None Remove="Repositories\Category \" />
+    <None Remove="Repositories\Product\" />
+    <None Remove="Repositories\Customer\" />
+    <None Remove="Repositories\Order\" />
+    <None Remove="Repositories\OrderItem\" />
+    <None Remove="Repositories\User\" />
+    <None Remove="Repositories\UserFile\" />
+    <None Remove="Repositories\Role\" />
+    <None Remove="Repositories\Permission\" />
+    <None Remove="Repositories\Employee\" />
+    <None Remove="Repositories\EmployeeFile\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Views\Categories\" />
+    <Folder Include="Views\Products\" />
+    <Folder Include="Views\Customers\" />
+    <Folder Include="Views\Orders\" />
+    <Folder Include="Dtos\" />
+    <Folder Include="Views\Roles\" />
+    <Folder Include="Views\Permissions\" />
+    <Folder Include="Views\Users\" />
+    <Folder Include="Views\Accounts\" />
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\images\products\" />
+    <Folder Include="wwwroot\images\employees\" />
+    <Folder Include="wwwroot\files\" />
+    <Folder Include="wwwroot\files\employees\" />
+    <Folder Include="Views\Employees\" />
+    <Folder Include="Dtos\ProductsDtos\" />
+    <Folder Include="Dtos\CategoriesDtos\" />
+    <Folder Include="Dtos\CustomersDtos\" />
+    <Folder Include="Dtos\OrdersDtos\" />
+    <Folder Include="Dtos\OrderItemsDtos\" />
+    <Folder Include="Dtos\UsersDtos\" />
+    <Folder Include="Dtos\UserFilesDtos\" />
+    <Folder Include="Dtos\RolesDtos\" />
+    <Folder Include="Dtos\PermissionsDtos\" />
+    <Folder Include="Views\OrderItems\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Repositories\Category \" />
+    <Folder Include="Repositories\Product\" />
+    <Folder Include="Repositories\Customer\" />
+    <Folder Include="Repositories\Order\" />
+    <Folder Include="Repositories\OrderItem\" />
+    <Folder Include="Repositories\User\" />
+    <Folder Include="Repositories\UserFile\" />
+    <Folder Include="Repositories\Role\" />
+    <Folder Include="Repositories\Permission\" />
+    <Folder Include="Repositories\Employee\" />
+    <Folder Include="Repositories\EmployeeFile\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\images\" />
+    <Content Remove="wwwroot\images\products\" />
+    <Content Remove="wwwroot\images\employees\" />
+    <Content Remove="wwwroot\files\" />
+    <Content Remove="wwwroot\files\employees\" />
+  </ItemGroup>
+</Project>

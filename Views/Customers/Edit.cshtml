@@ -1,0 +1,34 @@
+﻿@model Flower_Shop.Dtos.CustomersDtos.UpdateCustomerDto
+
+@{
+    ViewData["Title"] = "Edit Customer";
+}
+
+<h1>Edit Customer</h1>
+
+<form asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Phone" class="control-label"></label>
+        <input asp-for="Phone" class="form-control" />
+    </div>
+
+    <br />
+
+    <input type="submit" value="Save" class="btn btn-primary" />
+
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+
+</form>

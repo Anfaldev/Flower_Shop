@@ -1,0 +1,109 @@
+﻿@model Flower_Shop.Models.Employee
+
+@{
+    ViewData["Title"] = "Employee";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Employee Details</h2>
+
+        <a asp-action="Index" class="btn btn-secondary">
+            Back
+        </a>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                    {
+                        <img src="@Model.ImageUrl"
+                             width="180"
+                             height="180"
+                             style="object-fit: cover;" />
+                    }
+                    else
+                    {
+                        <p>No Image</p>
+                    }
+                </div>
+
+                <div class="col-md-9">
+                    <h3>@Model.Name</h3>
+
+                    <p>
+                        <strong>Employee ID:</strong>
+                        @Model.Id
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <h3>Files</h3>
+
+        <a asp-action="AddFile"
+           asp-route-uid="@Model.UID"
+           class="btn btn-primary">
+            Add File
+        </a>
+
+    </div>
+
+    @if (Model.Files.Any())
+    {
+        <table class="table table-bordered table-hover">
+
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>File Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @{
+                    int counter = 1;
+                }
+
+                @foreach (var file in Model.Files)
+                {
+                    <tr>
+                        <td>@counter</td>
+
+                        <td>@file.Name</td>
+
+                        <td>
+                            <a href="@file.FileURL"
+                               target="_blank"
+                               class="btn btn-sm btn-info">
+                                View
+                            </a>
+                        </td>
+                    </tr>
+
+                    counter++;
+                }
+
+            </tbody>
+
+        </table>
+    }
+    else
+    {
+        <p>No files uploaded yet.</p>
+    }
+
+</div>
+

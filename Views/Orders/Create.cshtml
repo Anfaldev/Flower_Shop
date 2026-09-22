@@ -1,0 +1,29 @@
+﻿@model Flower_Shop.Dtos.OrdersDtos.CreateOrderDto
+
+@{
+    ViewData["Title"] = "Create Order";
+}
+
+<h1>Create Order</h1>
+
+<form asp-action="Create" method="post">
+
+    <div class="form-group">
+        <label asp-for="OrderDate" class="control-label"></label>
+        <input asp-for="OrderDate" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CustomerId" class="control-label"></label>
+        <select asp-for="CustomerId" asp-items="ViewBag.CustomerList" class="form-control">
+            <option value="">Select Customer</option>
+        </select>
+    </div>
+
+    <br />
+
+    <input type="submit" value="Create" class="btn btn-primary" />
+
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+
+</form>

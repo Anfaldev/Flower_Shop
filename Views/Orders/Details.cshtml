@@ -1,0 +1,77 @@
+﻿@model Flower_Shop.Models.Order
+
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Order Details</h2>
+
+        <a asp-action="Index" class="btn btn-secondary">
+            Back
+        </a>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+
+            <p>
+                <strong>Order ID:</strong>
+                @Model.Id
+            </p>
+
+            <p>
+                <strong>Customer:</strong>
+                @Model.Customer?.Name
+            </p>
+
+            <p>
+                <strong>Order Date:</strong>
+                @Model.OrderDate
+            </p>
+
+        </div>
+    </div>
+
+    <h4 class="mb-3">Products</h4>
+
+    <table class="table table-bordered table-hover">
+
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Product</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @{
+                int counter = 1;
+            }
+
+            @foreach (var item in Model.OrderItems ?? new List<Flower_Shop.Models.OrderItem>())
+            {
+                <tr>
+                    <td>@counter</td>
+
+                    <td>
+                        @item.Product?.Name
+                    </td>
+
+                    <td>
+                        @item.Quantity
+                    </td>
+                </tr>
+
+                counter++;
+            }
+
+        </tbody>
+
+    </table>
+
+</div>
