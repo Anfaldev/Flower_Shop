@@ -1,0 +1,71 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.20" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.20">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.20" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.20">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\Categories\" />
+    <None Remove="Views\Products\" />
+    <None Remove="Views\Customers\" />
+    <None Remove="Views\Orders\" />
+    <None Remove="Views\Roles\" />
+    <None Remove="Views\Permissions\" />
+    <None Remove="Views\Users\" />
+    <None Remove="Views\Accounts\" />
+    <None Remove="Views\Employees\" />
+    <None Remove="Views\OrderItems\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Categories\" />
+    <Folder Include="Views\Products\" />
+    <Folder Include="Views\Customers\" />
+    <Folder Include="Views\Orders\" />
+    <Folder Include="Views\Roles\" />
+    <Folder Include="Views\Permissions\" />
+    <Folder Include="Views\Users\" />
+    <Folder Include="Views\Accounts\" />
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\images\products\" />
+    <Folder Include="wwwroot\images\employees\" />
+    <Folder Include="wwwroot\files\" />
+    <Folder Include="wwwroot\files\employees\" />
+    <Folder Include="Views\Employees\" />
+    <Folder Include="Views\OrderItems\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\images\" />
+    <Content Remove="wwwroot\images\products\" />
+    <Content Remove="wwwroot\images\employees\" />
+    <Content Remove="wwwroot\files\" />
+    <Content Remove="wwwroot\files\employees\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Flower_Shop.Domain\Flower_Shop.Domain.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\Flower_Shop.Application\Flower_Shop.Application.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\Flower_Shop.Infrastructure\Flower_Shop.Infrastructure.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

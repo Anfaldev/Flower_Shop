@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Dtos\" />
+    <None Remove="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dtos\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Flower_Shop.Domain\Flower_Shop.Domain.csproj" />
+    <ProjectReference Include="..\Flower_Shop.Infrastructure\Flower_Shop.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>
