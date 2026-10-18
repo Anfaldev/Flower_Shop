@@ -30,6 +30,11 @@ namespace Flower_Shop.Infrastructure.Repositories
             return _dbSet.ToList();
         }
 
+        public User? GetByEmail(string email)
+        {
+            return _dbSet.FirstOrDefault(u => u.Email == email);
+        }
+
         public User? GetById(int id)
         {
             return _dbSet.Find(id);
@@ -37,7 +42,12 @@ namespace Flower_Shop.Infrastructure.Repositories
 
         public User? GetByUId(string uid)
         {
-            return _dbSet.FirstOrDefault(e => e.UID == uid);
+            return _dbSet.FirstOrDefault(u => u.UID == uid);
+        }
+
+        public User? GetByUsername(string username)
+        {
+            return _dbSet.FirstOrDefault(u => u.Username == username);
         }
 
         public void Save()
@@ -51,4 +61,3 @@ namespace Flower_Shop.Infrastructure.Repositories
         }
     }
 }
-

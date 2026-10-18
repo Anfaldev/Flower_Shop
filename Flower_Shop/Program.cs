@@ -1,9 +1,22 @@
 ﻿
 
+using System.Net.Sockets;
 using Flower_Shop.Application.Services;
 using Flower_Shop.Infrastructure.Data;
 using Flower_Shop.Infrastructure.Repositories;
+using Flower_Shop.Infrastructure.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
+
+//docker compose build --no-cache
+//docker compose up -d
+
+//docker compose ps
+
+
+
+
+//http://localhost:8080/
+//http://localhost:8081/swagger/index.html
 
 var builder = WebApplication.CreateBuilder(args);
 

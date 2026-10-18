@@ -9,13 +9,20 @@
   <ItemGroup>
     <None Remove="Dtos\" />
     <None Remove="Services\" />
+    <None Remove="Dtos\loginDtos\" />
+    <None Remove="Dtos\RegisterDtos\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Dtos\" />
     <Folder Include="Services\" />
+    <Folder Include="Dtos\loginDtos\" />
+    <Folder Include="Dtos\RegisterDtos\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Flower_Shop.Domain\Flower_Shop.Domain.csproj" />
     <ProjectReference Include="..\Flower_Shop.Infrastructure\Flower_Shop.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
   </ItemGroup>
 </Project>

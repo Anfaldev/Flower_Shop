@@ -1,0 +1,24 @@
+services:
+  flowershop-mvc:
+    build:
+      context: .
+      dockerfile: Dockerfile.mvc
+    container_name: flowershop-mvc
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__DefaultDatabase: "Server=host.docker.internal,1433;Database=${DB_NAME};User Id=SA;Password=${SA_PASSWORD};TrustServerCertificate=True;Encrypt=False;"
+    restart: unless-stopped
+
+  flowershop-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: flowershop-api
+    ports:
+      - "8081:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__DefaultDatabase: "Server=host.docker.internal,1433;Database=${DB_NAME};User Id=SA;Password=${SA_PASSWORD};TrustServerCertificate=True;Encrypt=False;"
+    restart: unless-stopped

@@ -85,5 +85,10 @@ namespace Flower_Shop.Application.Services
 
             return true;
         }
+
+        public Task GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

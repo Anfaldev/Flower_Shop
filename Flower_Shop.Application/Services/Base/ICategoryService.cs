@@ -16,6 +16,7 @@ namespace Flower_Shop.Application.Services
         void UpdateCategory(UpdateCategoryDto dto);
 
         bool DeleteCategory(string uid);
+        Task GetAllAsync();
     }
 }
 

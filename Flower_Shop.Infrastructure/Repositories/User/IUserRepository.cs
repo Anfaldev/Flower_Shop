@@ -6,6 +6,10 @@ namespace Flower_Shop.Infrastructure.Repositories
     {
         IEnumerable<User> GetAll();
 
+        // IUserRepository.cs
+        User? GetByUsername(string username);
+        User? GetByEmail(string email);
+
         User? GetById(int id);
 
         User? GetByUId(string uid);
@@ -17,5 +21,6 @@ namespace Flower_Shop.Infrastructure.Repositories
         void Delete(User user);
 
         void Save();
+        
     }
 }
