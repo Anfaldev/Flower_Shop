@@ -1,7 +1,6 @@
-﻿@using Flower_Shop.Domain.Models
-@model Product
+﻿@using Flower_Shop.Application.Dtos.ProductsDtos
+@model ProductDto
 
-@{
     ViewData["Title"] = "Delete Product";
 }
 
@@ -25,7 +24,7 @@
         <dd class="col-sm-10">@Model.Stock</dd>
 
         <dt class="col-sm-2">Category</dt>
-        <dd class="col-sm-10">@Model.Category?.Name</dd>
+        <dd class="col-sm-10">@Model.CategoryName</dd>
 
     </dl>
 

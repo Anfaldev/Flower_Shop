@@ -11,12 +11,14 @@
     <None Remove="Services\" />
     <None Remove="Dtos\loginDtos\" />
     <None Remove="Dtos\RegisterDtos\" />
+    <None Remove="Dtos\CartDtos\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Dtos\" />
     <Folder Include="Services\" />
     <Folder Include="Dtos\loginDtos\" />
     <Folder Include="Dtos\RegisterDtos\" />
+    <Folder Include="Dtos\CartDtos\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Flower_Shop.Domain\Flower_Shop.Domain.csproj" />

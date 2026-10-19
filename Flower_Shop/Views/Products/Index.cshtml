@@ -1,5 +1,5 @@
-﻿@using Flower_Shop.Domain.Models
-@model IEnumerable<Product>
+﻿@using Flower_Shop.Application.Dtos.ProductsDtos
+@model IEnumerable<ProductDto>
 
 @{
     ViewData["Title"] = "Products";
@@ -43,8 +43,8 @@
                         {
                             <img src="@item.ImageUrl"
                                  alt="@item.Name"
-                                 width="80"
-                                 height="80"
+                                 width="60"
+                                 height="60"
                                  style="object-fit: cover;" />
                         }
                     </td>
@@ -55,7 +55,7 @@
 
                     <td>@item.Stock</td>
 
-                    <td>@item.Category?.Name</td>
+                    <td>@item.CategoryName</td>
 
                     <td>
 

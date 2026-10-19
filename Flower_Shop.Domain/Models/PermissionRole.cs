@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using Flower_Shop.Domain.Models;
-using Flower_Shop.Models;
 
 namespace Flower_Shop.Domain.Models
 {

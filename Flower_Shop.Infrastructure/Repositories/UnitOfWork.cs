@@ -21,6 +21,7 @@ namespace Flower_Shop.Infrastructure.Repositories.Base
             PermissionRepo = new PermissionRepository(db);
             EmployeeRepo = new EmployeeRepository(db);
             EmployeeFileRepo = new EmployeeFileRepository(db);
+            CartRepo = new CartRepository(db);
         }
 
         public ICategoryRepository CategoryRepo { get; }
@@ -35,9 +36,13 @@ namespace Flower_Shop.Infrastructure.Repositories.Base
         public IEmployeeRepository EmployeeRepo { get; }
         public IEmployeeFileRepository EmployeeFileRepo { get; }
 
-        public IRoleUserRepository RoleUserRepo => throw new NotImplementedException();
+        public ICartRepository CartRepo { get; }
 
-        public IPermissionRoleRepository PermissionRoleRepo => throw new NotImplementedException();
+        public IRoleUserRepository RoleUserRepo =>
+            throw new NotImplementedException();
+
+        public IPermissionRoleRepository PermissionRoleRepo =>
+            throw new NotImplementedException();
 
         public void Save()
         {

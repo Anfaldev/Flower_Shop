@@ -10,11 +10,13 @@
     <None Remove="Migrations\" />
     <None Remove="Repositories\" />
     <None Remove="Data\" />
+    <None Remove="Repositories\Cart\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Migrations\" />
     <Folder Include="Repositories\" />
     <Folder Include="Data\" />
+    <Folder Include="Repositories\Cart\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.20" />

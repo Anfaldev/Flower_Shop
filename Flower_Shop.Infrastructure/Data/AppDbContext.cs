@@ -2,6 +2,7 @@
 using Flower_Shop.Domain.Models;
 using Flower_Shop.Models;
 
+
 namespace Flower_Shop.Infrastructure.Data
 {
     public class AppDbContext : DbContext
@@ -10,7 +11,6 @@ namespace Flower_Shop.Infrastructure.Data
             : base(options)
         {
         }
-
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Employee> Employees { get; set; }
@@ -27,11 +27,13 @@ namespace Flower_Shop.Infrastructure.Data
         public DbSet<UserFile> UserFiles { get; set; }
         public DbSet<PermissionRole> PermissionRoles { get; set; }
 
+        public DbSet<CartItem> CartItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
+            // PermissionRole: many-to-many relationship
             modelBuilder.Entity<PermissionRole>()
                 .HasKey(pr => new
                 {
@@ -39,7 +41,7 @@ namespace Flower_Shop.Infrastructure.Data
                     pr.PermissionId
                 });
 
-
+            // RoleUser: many-to-many relationship
             modelBuilder.Entity<RoleUser>()
                 .HasKey(ru => new
                 {
@@ -49,4 +51,3 @@ namespace Flower_Shop.Infrastructure.Data
         }
     }
 }
-

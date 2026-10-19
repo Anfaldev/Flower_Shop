@@ -1,0 +1,11 @@
+﻿namespace Flower_Shop.Application.Dtos.CartDtos
+{
+    public class AddCartDto
+    {
+        public int UserId { get; set; }
+
+        public int ProductId { get; set; }
+
+        public int Quantity { get; set; } = 1;
+    }
+}

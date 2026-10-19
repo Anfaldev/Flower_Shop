@@ -1,5 +1,6 @@
-﻿@using Flower_Shop.Domain.Models
-@model IEnumerable<Permission>
+﻿@using Flower_Shop.Application.Dtos.PermissionsDtos
+@model IEnumerable<PermissionDto>
+
 @{
     ViewData["Title"] = "Permissions";
     int counter = 1;
@@ -32,13 +33,11 @@
             @foreach (var permission in Model)
             {
                 <tr>
-
                     <td>@counter</td>
 
                     <td>@permission.Name</td>
 
                     <td>
-
                         <a asp-action="Edit"
                            asp-route-uid="@permission.UID"
                            class="btn btn-sm btn-warning">
@@ -50,9 +49,7 @@
                            class="btn btn-sm btn-danger">
                             Delete
                         </a>
-
                     </td>
-
                 </tr>
 
                 counter++;

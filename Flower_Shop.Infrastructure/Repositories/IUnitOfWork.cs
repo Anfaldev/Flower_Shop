@@ -25,6 +25,8 @@ namespace Flower_Shop.Infrastructure.Repositories
         IPermissionRepository PermissionRepo { get; }
         IPermissionRoleRepository PermissionRoleRepo { get; }
 
+        ICartRepository CartRepo { get; }
+
         void Save();
     }
 }
