@@ -2,7 +2,6 @@
 using Flower_Shop.Domain.Models;
 using Flower_Shop.Infrastructure.Repositories;
 
-
 namespace Flower_Shop.Application.Services
 {
     public class UserService : IUserService
@@ -16,13 +15,10 @@ namespace Flower_Shop.Application.Services
 
         public User? GetUserByUsername(string username)
         {
-            return _unitOfWork.UserRepo
-                .GetAll()
-                .FirstOrDefault(u => u.Username == username);
+            return _unitOfWork.UserRepo.GetByUsername(username);
         }
 
-
-        public bool Login(LoginDto loginDto)
+        public User? Login(LoginDto loginDto)
         {
             var user = _unitOfWork.UserRepo
                 .GetByUsername(loginDto.Username);
@@ -30,7 +26,7 @@ namespace Flower_Shop.Application.Services
             if (user == null ||
                 string.IsNullOrEmpty(user.PasswordHash))
             {
-                return false;
+                return null;
             }
 
             bool userFound = BCrypt.Net.BCrypt.Verify(
@@ -38,21 +34,20 @@ namespace Flower_Shop.Application.Services
                 user.PasswordHash
             );
 
-            return userFound;
+            return userFound ? user : null;
         }
 
-
-        public bool Register(RegisterDto registerDto)
+        public User? Register(RegisterDto registerDto)
         {
             var existingUsername = _unitOfWork.UserRepo
-                 .GetByUsername(registerDto.Username);
+                .GetByUsername(registerDto.Username);
 
             var existingEmail = _unitOfWork.UserRepo
                 .GetByEmail(registerDto.Email);
 
             if (existingUsername != null || existingEmail != null)
             {
-                return false;
+                return null;
             }
 
             var user = new User
@@ -67,10 +62,9 @@ namespace Flower_Shop.Application.Services
             };
 
             _unitOfWork.UserRepo.Add(user);
-
             _unitOfWork.Save();
 
-            return true;
+            return user;
         }
     }
 }

@@ -28,6 +28,7 @@ namespace Flower_Shop.Controllers
             var user = _userService.GetUserByUsername(username);
 
             if (user != null &&
+                !string.IsNullOrEmpty(user.PasswordHash) &&
                 BCrypt.Net.BCrypt.Verify(
                     password,
                     user.PasswordHash))
@@ -47,20 +48,17 @@ namespace Flower_Shop.Controllers
                     claims,
                     "MyCookieAuth");
 
-                var principal =
-                    new ClaimsPrincipal(identity);
+                var principal = new ClaimsPrincipal(identity);
 
                 await HttpContext.SignInAsync(
                     "MyCookieAuth",
                     principal);
 
-                return RedirectToAction(
-                    "Index",
-                    "Home");
+                return RedirectToAction("Index", "Home");
             }
 
             ModelState.AddModelError(
-                "",
+                string.Empty,
                 "Invalid username or password");
 
             return View();
@@ -69,11 +67,9 @@ namespace Flower_Shop.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync(
-                "MyCookieAuth");
+            await HttpContext.SignOutAsync("MyCookieAuth");
 
-            return RedirectToAction(
-                nameof(Login));
+            return RedirectToAction(nameof(Login));
         }
     }
 }

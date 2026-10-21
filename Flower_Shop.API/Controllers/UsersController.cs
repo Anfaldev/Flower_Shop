@@ -1,7 +1,7 @@
 
-
 using Flower_Shop.Application.Dtos.UsersDtos;
 using Flower_Shop.Application.Services;
+using Flower_Shop.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Flower_Shop.API.Controllers
@@ -17,30 +17,28 @@ namespace Flower_Shop.API.Controllers
             _userService = userService;
         }
 
-
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDto loginDto)
         {
-            bool userFound = _userService.Login(loginDto);
+            User? user = _userService.Login(loginDto);
 
-            if (userFound)
-            {
-                return Ok(new
-                {
-                    message = "Login Successful"
-                });
-            }
-            else
+            if (user == null)
             {
                 return Unauthorized(new
                 {
                     message = "Invalid username or password"
                 });
             }
+
+            return Ok(new
+            {
+                userId = user.Id,
+                username = user.Username,
+                name = user.Name,
+                email = user.Email,
+                message = "Login Successful"
+            });
         }
-
-
-
 
         [HttpPost("register")]
         public IActionResult Register([FromBody] RegisterDto registerDto)
@@ -64,24 +62,24 @@ namespace Flower_Shop.API.Controllers
                 });
             }
 
-            bool isRegistered = _userService.Register(registerDto);
+            User? user = _userService.Register(registerDto);
 
-            if (isRegistered)
+            if (user == null)
             {
-                return Ok(new
+                return Conflict(new
                 {
-                    message = "Registration Successful"
+                    message = "Username or Email already exists"
                 });
             }
 
-            return Conflict(new
+            return Ok(new
             {
-                message = "Username or Email already exists"
+                userId = user.Id,
+                username = user.Username,
+                name = user.Name,
+                email = user.Email,
+                message = "Registration Successful"
             });
         }
-
-
-
-
     }
 }
