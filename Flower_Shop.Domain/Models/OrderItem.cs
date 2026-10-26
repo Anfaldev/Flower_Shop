@@ -1,5 +1,4 @@
-﻿using System;
-using Flower_Shop.Domain.Models;
+﻿using Flower_Shop.Domain.Models;
 
 namespace Flower_Shop.Domain.Models
 {
@@ -18,6 +17,8 @@ namespace Flower_Shop.Domain.Models
         public Product Product { get; set; }
 
         public int Quantity { get; set; }
+
+        public decimal UnitPrice { get; set; }
     }
 }
 

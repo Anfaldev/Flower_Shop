@@ -1,5 +1,5 @@
-﻿@using Flower_Shop.Application.Dtos.OrdersDtos
-
+﻿
+@using Flower_Shop.Application.Dtos.OrdersDtos
 @model IEnumerable<OrderDto>
 
 @{
@@ -9,68 +9,141 @@
 <div class="container mt-3">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
-
         <h2>Orders</h2>
 
         <a asp-action="Create" class="btn btn-primary">
             Create New Order
         </a>
-
     </div>
 
-    <table class="table table-bordered table-hover">
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
 
-        <thead class="table-primary">
-            <tr>
-                <th>Id</th>
-                <th>Order Date</th>
-                <th>Customer</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
+            <thead class="table-primary">
+                <tr>
+                    <th>Order ID</th>
+                    <th>User ID</th>
+                    <th>Created At</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Products</th>
+                    <th>Update Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
 
-        <tbody>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.UserId</td>
 
-            @if (Model != null)
-            {
-                @foreach (var item in Model)
+                            <td>
+                                @item.OrderDate.ToString("yyyy-MM-dd HH:mm")
+                            </td>
+
+                            <td>
+                                @item.TotalAmount.ToString("N2") SAR
+                            </td>
+
+                            <td>
+                                @if (item.Status == "Pending")
+                                {
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                }
+                                else if (item.Status == "Processing")
+                                {
+                                    <span class="badge bg-info text-dark">Processing</span>
+                                }
+                                else if (item.Status == "Completed")
+                                {
+                                    <span class="badge bg-success">Completed</span>
+                                }
+                                else if (item.Status == "Cancelled")
+                                {
+                                    <span class="badge bg-danger">Cancelled</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">@item.Status</span>
+                                }
+                            </td>
+
+                            <td>
+                                <button class="btn btn-info btn-sm"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#order-@item.Id">
+                                    View Products
+                                </button>
+                            </td>
+
+                            <td>
+                                <form asp-action="UpdateStatus" method="post">
+                                    @Html.AntiForgeryToken()
+
+                                    <input type="hidden" name="orderId" value="@item.Id" />
+
+                                    <div class="d-flex gap-2">
+                                        <select name="status" class="form-select form-select-sm">
+                                            <option value="Pending" selected="@(item.Status == "Pending")">Pending</option>
+                                            <option value="Processing" selected="@(item.Status == "Processing")">Processing</option>
+                                            <option value="Completed" selected="@(item.Status == "Completed")">Completed</option>
+                                            <option value="Cancelled" selected="@(item.Status == "Cancelled")">Cancelled</option>
+                                        </select>
+
+                                        <button type="submit" class="btn btn-success btn-sm">
+                                            Save
+                                        </button>
+                                    </div>
+                                </form>
+                            </td>
+
+                            <td>
+                                <div class="d-flex gap-1">
+                                    <a asp-action="Edit"
+                                       asp-route-uid="@item.UID"
+                                       class="btn btn-warning btn-sm">Edit</a>
+
+                                    <a asp-action="Details"
+                                       asp-route-uid="@item.UID"
+                                       class="btn btn-info btn-sm">Details</a>
+
+                                    <a asp-action="Delete"
+                                       asp-route-uid="@item.UID"
+                                       class="btn btn-danger btn-sm">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="8" class="p-0 border-0">
+                                <div class="collapse" id="order-@item.Id">
+                                    <div class="p-3 bg-light">
+                                        <h6>Order #@item.Id Products</h6>
+                                        <p class="mb-0 text-muted">
+                                            Product details need to be loaded from the order details.
+                                        </p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
                 {
                     <tr>
-
-                        <td>@item.Id</td>
-
-                        <td>@item.OrderDate</td>
-
-                        <td>@item.CustomerName</td>
-
-                        <td>
-
-                            <a asp-action="Edit"
-                               asp-route-uid="@item.UID"
-                               class="btn btn-warning btn-sm">
-                                Edit
-                            </a>
-
-                            <a asp-action="Details"
-                               asp-route-uid="@item.UID"
-                               class="btn btn-info btn-sm">
-                                Details
-                            </a>
-
-                            <a asp-action="Delete"
-                               asp-route-uid="@item.UID"
-                               class="btn btn-danger btn-sm">
-                                Delete
-                            </a>
-
+                        <td colspan="8" class="text-center">
+                            No orders found.
                         </td>
-
                     </tr>
                 }
-            }
+            </tbody>
 
-        </tbody>
-
-    </table>
+        </table>
+    </div>
 
 </div>

@@ -29,9 +29,18 @@ namespace Flower_Shop.Infrastructure.Data
 
         public DbSet<CartItem> CartItems { get; set; }
 
+
+        public DbSet<Notification> Notifications { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Order>()
+           .HasOne(o => o.User)
+           .WithMany()
+           .HasForeignKey(o => o.UserId)
+           .OnDelete(DeleteBehavior.Restrict);
 
             // PermissionRole: many-to-many relationship
             modelBuilder.Entity<PermissionRole>()

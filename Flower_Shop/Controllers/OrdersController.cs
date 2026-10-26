@@ -1,7 +1,7 @@
 ﻿using Flower_Shop.Application.Dtos.OrdersDtos;
 using Flower_Shop.Application.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 
 namespace Flower_Shop.Controllers
 {
@@ -23,30 +23,27 @@ namespace Flower_Shop.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.CustomerList = new SelectList(
-                _orderService.GetAllCustomers(),
-                "Id",
-                "Name"
-            );
-
             return View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(CreateOrderDto dto)
         {
+            var userIdClaim = User.FindFirstValue("UserId");
+
+            if (string.IsNullOrEmpty(userIdClaim))
+                return Challenge();
+
             if (ModelState.IsValid)
             {
-                _orderService.AddOrder(dto);
+                if (!int.TryParse(userIdClaim, out var userId))
+                    return Challenge();
+
+                _orderService.AddOrder(userId);
+
                 return RedirectToAction(nameof(Index));
             }
-
-            ViewBag.CustomerList = new SelectList(
-                _orderService.GetAllCustomers(),
-                "Id",
-                "Name",
-                dto.CustomerId
-            );
 
             return View(dto);
         }
@@ -64,20 +61,14 @@ namespace Flower_Shop.Controllers
                 Id = order.Id,
                 UID = order.UID,
                 OrderDate = order.OrderDate,
-                CustomerId = order.CustomerId
+                Status = order.Status
             };
-
-            ViewBag.CustomerList = new SelectList(
-                _orderService.GetAllCustomers(),
-                "Id",
-                "Name",
-                dto.CustomerId
-            );
 
             return View(dto);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(UpdateOrderDto dto)
         {
             if (ModelState.IsValid)
@@ -92,14 +83,43 @@ namespace Flower_Shop.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewBag.CustomerList = new SelectList(
-                _orderService.GetAllCustomers(),
-                "Id",
-                "Name",
-                dto.CustomerId
-            );
-
             return View(dto);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdateStatus(int orderId, string status)
+        {
+            var order = _orderService.GetOrderById(orderId);
+
+            if (order == null)
+                return NotFound();
+
+            var allowedStatuses = new[]
+            {
+                "Pending",
+                "Processing",
+                "Completed",
+                "Cancelled"
+            };
+
+            if (string.IsNullOrWhiteSpace(status) ||
+                !allowedStatuses.Contains(status))
+            {
+                return BadRequest("Invalid order status.");
+            }
+
+            var dto = new UpdateOrderDto
+            {
+                Id = order.Id,
+                UID = order.UID,
+                OrderDate = order.OrderDate,
+                Status = status
+            };
+
+            _orderService.UpdateOrder(dto);
+
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
@@ -125,6 +145,7 @@ namespace Flower_Shop.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
             var order = _orderService.GetOrderById(id);

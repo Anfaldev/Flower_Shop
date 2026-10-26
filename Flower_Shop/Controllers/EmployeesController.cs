@@ -140,7 +140,7 @@ namespace Flower_Shop.Controllers
         }
 
       
-        public IActionResult View(string uid)
+        public new IActionResult View(string uid)
         {
             var employee =
                 _employeeService.GetEmployeeByUid(uid);

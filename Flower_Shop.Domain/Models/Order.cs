@@ -11,11 +11,13 @@ namespace Flower_Shop.Domain.Models
 
         public DateTime OrderDate { get; set; }
 
-        public int CustomerId { get; set; }
+        public int UserId { get; set; }
 
-        public Customer Customer { get; set; }
+        public User User { get; set; } = null!;
 
-        public ICollection<OrderItem>? OrderItems { get; set; }
+        public string Status { get; set; } = "Pending";
+
+        public ICollection<OrderItem> OrderItems { get; set; }
+        = new List<OrderItem>();
     }
 }
-

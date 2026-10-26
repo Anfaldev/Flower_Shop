@@ -1,5 +1,5 @@
 ﻿@using Flower_Shop.Domain.Models
-@model Order
+@model Flower_Shop.Application.Dtos.OrdersDtos.CreateOrderDto
 @{
     ViewData["Title"] = "Create Order";
 }
@@ -14,10 +14,6 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="CustomerId" class="control-label"></label>
-        <select asp-for="CustomerId" asp-items="ViewBag.CustomerList" class="form-control">
-            <option value="">Select Customer</option>
-        </select>
     </div>
 
     <br />

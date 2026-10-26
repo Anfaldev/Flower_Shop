@@ -1,6 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'cartScreen.dart';
-import 'categoryScreen.dart';
+import 'myOrdersScreen.dart';
 import 'productsScreen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -45,23 +46,6 @@ class HomeScreen extends StatelessWidget {
               },
             ),
 
-
-            ListTile(
-              leading: const Icon(Icons.category),
-              title: const Text('Categories'),
-              onTap: () {
-                Navigator.pop(context);
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const CategoryScreen(),
-                  ),
-                );
-              },
-            ),
-
-
             // Products
             ListTile(
               leading: const Icon(Icons.shopping_cart),
@@ -95,6 +79,23 @@ class HomeScreen extends StatelessWidget {
               },
             ),
 
+
+
+
+            ListTile(
+              leading: const Icon(Icons.shopping_bag),
+              title: const Text('My Orders'),
+              onTap: () {
+                Navigator.pop(context);
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MyOrdersScreen(userId),
+                  ),
+                );
+              },
+            ),
 
 
 

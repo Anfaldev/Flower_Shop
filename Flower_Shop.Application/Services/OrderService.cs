@@ -23,9 +23,9 @@ namespace Flower_Shop.Application.Services
                 Id = o.Id,
                 UID = o.UID,
                 OrderDate = o.OrderDate,
-                CustomerId = o.CustomerId,
-                CustomerName = _unitOfWork.CustomerRepo
-                    .GetById(o.CustomerId)?.Name
+                Status = o.Status,
+                UserId = o.UserId,
+                TotalAmount = o.OrderItems.Sum(item => item.Quantity * item.UnitPrice)
             }).ToList();
         }
 
@@ -39,22 +39,19 @@ namespace Flower_Shop.Application.Services
             return _unitOfWork.OrderRepo.GetByUId(uid);
         }
 
-        public IEnumerable<Customer> GetAllCustomers()
-        {
-            return _unitOfWork.CustomerRepo.GetAll();
-        }
-
-        public void AddOrder(CreateOrderDto dto)
+        public void AddOrder(int userId)
         {
             var order = new Order
             {
-                OrderDate = dto.OrderDate,
-                CustomerId = dto.CustomerId
+                OrderDate = DateTime.Now,
+                UserId = userId,
+                Status = "Pending"
             };
 
             _unitOfWork.OrderRepo.Add(order);
             _unitOfWork.Save();
         }
+
 
         public void UpdateOrder(UpdateOrderDto dto)
         {
@@ -66,7 +63,7 @@ namespace Flower_Shop.Application.Services
             }
 
             order.OrderDate = dto.OrderDate;
-            order.CustomerId = dto.CustomerId;
+            order.Status = dto.Status;
 
             _unitOfWork.OrderRepo.Update(order);
             _unitOfWork.Save();

@@ -12,9 +12,7 @@ namespace Flower_Shop.Application.Services
 
         Order? GetOrderByUid(string uid);
 
-        IEnumerable<Customer> GetAllCustomers();
-
-        void AddOrder(CreateOrderDto dto);
+        void AddOrder(int userId);
 
         void UpdateOrder(UpdateOrderDto dto);
 
