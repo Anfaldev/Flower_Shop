@@ -1,15 +1,10 @@
-import 'package:secondmobile/AllWidgets/0scaffoldExample2.dart';
+
 import 'package:flutter/material.dart';
-import 'package:secondmobile/secondmobile/categoryScreen.dart';
-import 'package:secondmobile/secondmobile/data/CategoryService.dart';
-import 'package:secondmobile/secondmobile/loginScreen3.dart';
-import 'package:secondmobile/secondmobile/signupscreen.dart';
+import 'package:provider/provider.dart';
 
-import 'AllWidgets/0.scaffoldexample.dart';
-
-import 'AllWidgets/18.progressExamplePage.dart';
-import 'secondmobile/loginScreen.dart';
-import 'secondmobile/loginScreen2.dart';
+import 'secondmobile2/Screens/loginScreen.dart';
+import 'secondmobile2/providers/userProvider.dart';
+import 'secondmobile2/providers/ProductsProvider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,17 +13,27 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => UserProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ProductsProvider(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.deepPurple,
+          ),
+        ),
+        home: const LoginScreen(),
+        debugShowCheckedModeBanner: false,
       ),
-      home: Loginscreen3(),
-      debugShowCheckedModeBanner: false,
     );
   }
 }

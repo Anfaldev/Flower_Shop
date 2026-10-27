@@ -1,0 +1,58 @@
+
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'connection.dart';
+
+class UserService {
+
+  Future<Map<String, dynamic>?> login(
+      String username,
+      String password,
+      ) async {
+
+    final response = await http.post(
+      Uri.parse(ConnectionString.login),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        'username': username,
+        'password': password,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body) as Map<String, dynamic>;
+    } else if (response.statusCode == 401) {
+      return null;
+    } else {
+      throw Exception('Failed to login');
+    }
+  }
+  // Register
+  Future<Map<String, dynamic>?> register(
+      String username,
+      String email,
+      String password,
+      ) async {
+    final response = await http.post(
+      Uri.parse(ConnectionString.register),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        'username': username,
+        'email': email,
+        'password': password,
+      }),
+    );
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return jsonDecode(response.body) as Map<String, dynamic>;
+    } else if (response.statusCode == 400 || response.statusCode == 409) {
+      return null;
+    } else {
+      throw Exception('Failed to register');
+    }
+  }
+}
