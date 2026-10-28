@@ -45,8 +45,9 @@ class UserProvider extends ChangeNotifier {
 
   // Register
   Future<bool> register(
-      String username,
+      String name,
       String email,
+      String username,
       String password,
       ) async {
     isLoading = true;
@@ -54,7 +55,12 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      user = await userService.register(username, email, password);
+      user = await userService.register(
+        name,
+        email,
+        username,
+        password,
+      );
 
       if (user == null) {
         error = 'Registration failed';

@@ -1,9 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/userProvider.dart';
+import 'cartScreen.dart';
+import 'categoryScreen.dart';
 import 'loginScreen.dart';
+import 'ordersScreen.dart';
 import 'productsScreen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -18,7 +20,6 @@ class HomeScreen extends StatelessWidget {
         title: const Text('Home Page'),
         backgroundColor: Colors.green,
       ),
-
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -33,7 +34,6 @@ class HomeScreen extends StatelessWidget {
                 color: Colors.green,
               ),
             ),
-
             ListTile(
               leading: const Icon(Icons.home),
               title: const Text('Home'),
@@ -41,24 +41,59 @@ class HomeScreen extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
-
             ListTile(
               leading: const Icon(Icons.shopping_bag),
               title: const Text('Products'),
               onTap: () {
                 Navigator.pop(context);
-
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const ProductsScreen(),
+                    builder: (_) => ProductsScreen(userProvider.userId),
                   ),
                 );
               },
             ),
-
+            ListTile(
+              leading: const Icon(Icons.category),
+              title: const Text('Categories'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const CategoryScreen(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.shopping_cart),
+              title: const Text('Cart'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => CartScreen(userProvider.userId),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.receipt_long),
+              title: const Text('My Orders'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => OrdersScreen(userProvider.userId),
+                  ),
+                );
+              },
+            ),
             const Divider(),
-
             ListTile(
               leading: const Icon(
                 Icons.logout,
@@ -71,7 +106,7 @@ class HomeScreen extends StatelessWidget {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const LoginScreen(),
+                    builder: (_) => const LoginScreen(),
                   ),
                       (route) => false,
                 );
@@ -80,7 +115,6 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -89,11 +123,8 @@ class HomeScreen extends StatelessWidget {
               'Welcome Ya ${userProvider.username}',
               style: const TextStyle(fontSize: 22),
             ),
-
             const SizedBox(height: 20),
-
             Text('User ID: ${userProvider.userId}'),
-
             Text('Email: ${userProvider.email}'),
           ],
         ),
